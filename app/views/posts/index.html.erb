@@ -1,14 +1,11 @@
-<div class="container">
-
     <div class="row">
       <div class="text-center">
-          <!-- Button trigger modal --><br>
+          <!-- Button trigger modal -->
           <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#mynewpost">
             New Post
           </button>
       </div>
     </div>
-
     <br>
     <hr>
 
@@ -16,27 +13,33 @@
         <%= render @posts %>
     </div>
 
-
     <!-- Modal  create action -->
-      <%= form_for(@post, remote: true) do |f| %>
+      <%= simple_form_for(@post, html: { class: 'form-horizontal'}) do |f| %>
+      <%#= form_for(@post) do |f| %>
+      <%#= form_for @post, :html => {:class => "form-horizontal center"}, remote: true do |f| %>
         <div class="modal fade" id="mynewpost" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
 
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-              <h4 class="modal-title" id="myModalLabel">Post</h4>
+              <h4 class="modal-title" id="myModalLabel">Create Post</h4>
             </div>
 
             <div class="modal-body">
+              
+              <%= f.input :title, class: "post_title" %>
+              <%= f.input :content, class: "post_content" %>
+
               <div class="field">
                 <%= f.label :title %><br>
                 <%= f.text_area :title, class: "form-control post_title" %>
               </div>
               <div class="field">
-                <%= f.label :content %><br>
+                <%= f.label :content %><br>Test
                 <%= f.text_area :content, class: "form-control post_content" %>
               </div>
+
             </div>
 
             <div class="modal-footer">
@@ -48,7 +51,3 @@
         </div>
       <% end %>
     <!-- Modal -->
-
-
-
-</div>

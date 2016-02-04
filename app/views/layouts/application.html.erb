@@ -2,13 +2,29 @@
 <html>
 <head>
   <title>AjaxApp</title>
+<!-- [if lt IE 9]>
+	<script src="https://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
+<![endif] -->
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
 
+<div class="container"><!-- Container -->
+  <!-- Error validtion using TWBOOTSTRAP -->
+  <% flash.each do |name, msg| %>
+    <div class="alert alert-<%= name == :notice ? 'success' : 'danger' %> alert-dismissible" role="alert"><!-- Flash errors -->
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <%= msg %>
+    </div>
+  <% end %>
+
+
 <%= yield %>
+
+</div><!-- Container -->
 
 </body>
 </html>
