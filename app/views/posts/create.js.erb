@@ -1,0 +1,9 @@
+<!-- close the modal --> 
+$("#mynewpost").modal('hide');
+<!-- clear input fields values in the form modal --> 
+$(".post_title").val('');
+$(".post_content").val('');
+<!-- prepend new post object to the #container_posts div on index view --> 
+$("#container_posts").prepend('<%= j render @post %>');
+<!-- add fade in animation when post is added to index view  --> 
+$("#post_<%= @post.id %>").hide().fadeIn(1000);
