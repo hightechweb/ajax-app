@@ -1,5 +1,5 @@
 Rails.application.configure do
-  # config.web_console.whitelisted_ips = '98.231.21.191'
+  config.web_console.whitelisted_ips = '50.17.182.190' # DT console render error override
   # Settings specified here will take precedence over those in config/application.rb.
 
   # In the development environment your application's code is reloaded on
