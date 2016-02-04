@@ -1,6 +1,9 @@
 <!-- close the modal -->
 $("#myupdatepost_<%= @post.id %>").modal('hide');
-<!-- add fade out animation to post and remove from DOM after animation finished-->
+<!-- add fade out animation to post and prepend from DOM after animation finished-->
 $("#post_<%= @post.id %>").fadeOut(500, function(){
+
 	$(this).remove();
+	$("#container_posts").prepend('<%= j render @post %>');
+	
 });

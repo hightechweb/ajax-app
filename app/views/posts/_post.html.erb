@@ -19,7 +19,7 @@
     </div><!-- Panel Body -->
   </div><!-- Panel Info -->
 
-  <!-- Modal -->
+  <!-- Update Modal -->
   <%= form_for(post, :method => :put, remote: true) do |f| %>
   <div class="modal fade" id="myupdatepost_<%= post.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
@@ -39,8 +39,8 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <%= submit_tag "Create", class: "btn btn-primary" %>
+          <button type="button" id="myupdatebutton_<%= post.id %>" class="btn btn-default" data-dismiss="modal">Close</button>
+          <%= submit_tag "Update", class: "btn btn-primary" %>
         </div>
       </div>
     </div>
