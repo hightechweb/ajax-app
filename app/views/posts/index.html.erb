@@ -14,7 +14,8 @@
     </div>
 
     <!-- Modal  create action -->
-      <%= simple_form_for(@post, html: { class: 'form-horizontal'}) do |f| %>
+      <%= simple_form_for(@post, html: { class: 'form-inline'}) do |f| %>
+      <%#= simple_form_for(@user, html: {multipart: true}, remote: true) do |f| %>
       <%#= form_for(@post) do |f| %>
       <%#= form_for @post, :html => {:class => "form-horizontal center"}, remote: true do |f| %>
         <div class="modal fade" id="mynewpost" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -23,28 +24,29 @@
 
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-              <h4 class="modal-title" id="myModalLabel">Create Post</h4>
+              <h4 class="modal-title" id="myModalLabel">Create Post Z</h4>
             </div>
 
             <div class="modal-body">
-              
-              <%= f.input :title, class: "post_title" %>
-              <%= f.input :content, class: "post_content" %>
+              <%= f.error_notification %>
 
               <div class="field">
-                <%= f.label :title %><br>
-                <%= f.text_area :title, class: "form-control post_title" %>
+                <h4 class="text-uppercase"><small>Post Title</small></h4>
+                <%= f.input :title, label: false, error: 'Post title is mandatory, please specify one', :input_html => { class: 'form-control post_title', id: 'title' } %>
               </div>
+
+
               <div class="field">
-                <%= f.label :content %><br>Test
-                <%= f.text_area :content, class: "form-control post_content" %>
+                <h4 class="text-uppercase"><small>Post Content</small></h4>
+                <%= f.input :content, label: false, :input_html => { :rows => 4, class: 'form-control post_content', id: 'content' } %>
               </div>
 
             </div>
 
             <div class="modal-footer">
               <button type="button" class="btn btn-default" data-dismiss="modal" id="mynewpostclose">Close</button>
-              <%= submit_tag "Create", class: "btn btn-primary" %>
+              <%= f.error :base %>
+              <%= f.button :submit, class: "btn btn-primary", value: "Create" %>
             </div>
           </div>
         </div>

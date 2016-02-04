@@ -25,18 +25,19 @@ class PostsController < ApplicationController
   # POST /posts
   # POST /posts.json
   def create
+    @posts = Post.all #fixed 'nil' is not an ActiveModel-compatible object. It must implement :to_partial_path ” error in posts#create # not here
     @post = Post.new(post_params)
 
     respond_to do |format|
       if @post.save
-        @created = true
-        format.html { redirect_to root_path, notice: 'Post was successfully created.' }
+        # @created = true
+        format.html { redirect_to @post, notice: 'Post was successfully created.' }
         # format.html { redirect_to @post, notice: 'Post was successfully created.' }
         format.json { render :show, status: :created, location: @post }
-        format.js
+        # format.js
       else
         # @created = false
-        format.html { redirect_to root_path, notice: 'Failed to create new post.' }
+        format.html { render :index, notice: 'Failed to create new post.' } #new
         # format.html { render :new }
         format.json { render json: @post.errors, status: :unprocessable_entity }
         # format.js
@@ -51,7 +52,7 @@ class PostsController < ApplicationController
       if @post.update(post_params)
         format.html { redirect_to @post, notice: 'Post was successfully updated.' }
         format.json { render :show, status: :ok, location: @post }
-        format.js
+        # format.js
       else
         format.html { render :edit }
         format.json { render json: @post.errors, status: :unprocessable_entity }
