@@ -1,0 +1,14 @@
+// Add the dialog title new.js.erb
+$('#dialog h3').html("<i class='glyphicon glyphicon-plus'></i> Add New Post");
+
+// Render the new form body
+$('.modal-body').html('<%= j render("form") %>');
+
+// Show the dynamic dialog
+$('#dialog').modal("show");
+
+// Set focus to the first element
+$('#dialog').on('shown.bs.modal', function () {
+	  $('.first_input').focus();
+});
+

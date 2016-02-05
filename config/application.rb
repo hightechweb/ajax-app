@@ -22,5 +22,9 @@ module AjaxApp
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
+
+
+    # Uncomment this to hide printing to web console during DEV - DT
+    config.web_console.whiny_requests = false
   end
 end

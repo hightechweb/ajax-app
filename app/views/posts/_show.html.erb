@@ -1,0 +1,17 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Post Title:</strong>
+  <%= @post.title %>
+</p>
+
+<p>
+  <strong>Post Content:</strong>
+  <%= @post.content %>
+</p>
+
+
+<div class="modal-footer">
+  <%= link_to 'Edit Post', edit_post_path(@post) , remote: true, :class => "btn btn-default" %>
+  <button type="button" class="btn btn-primary" id="modal-close" data-dismiss="modal">Close</button>
+</div>

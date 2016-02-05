@@ -12,6 +12,22 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require bootstrap-sprockets
 //= require twitter/bootstrap
-//= require turbolinks
+//= require data-confirm-modal
 //= require_tree .
+
+// Custom error validation function for AJAX CRUD modals
+// The validation errors will be shown on the #error_display div in _form.html.erb
+$(document).ajaxError(function(event,xhr,options,exc) {
+
+    var errors = JSON.parse(xhr.responseText);
+    var er ='<div class="alert alert-danger alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
+    for(var i = 0; i < errors.length; i++){
+        var list = errors[i];
+        er += '<li>' + list + '</li>';
+    }
+    er+='</div>';
+    $("#error_display").html(er);
+
+});

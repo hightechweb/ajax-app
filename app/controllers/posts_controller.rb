@@ -5,7 +5,6 @@ class PostsController < ApplicationController
   # GET /posts.json
   def index
     @posts = Post.all
-    @post = Post.new
   end
 
   # GET /posts/1
@@ -18,31 +17,27 @@ class PostsController < ApplicationController
     @post = Post.new
   end
 
-  # GET /posts/1/edit
-  def edit
-  end
-
   # POST /posts
   # POST /posts.json
   def create
-    @posts = Post.all #fixed 'nil' is not an ActiveModel-compatible object. It must implement :to_partial_path ” error in posts#create # not here
-    @post = Post.new(post_params)
+    # @posts = Post.all #fixed 'nil' is not an ActiveModel-compatible object. It must implement :to_partial_path ” error in posts#create # not here
+    @post = Post.create(post_params)
 
     respond_to do |format|
       if @post.save
         # @created = true
-        format.html { redirect_to @post, notice: 'Post was successfully created.' }
+        format.json { head :no_content }
+        format.js
         # format.html { redirect_to @post, notice: 'Post was successfully created.' }
-        format.json { render :show, status: :created, location: @post }
-        # format.js
       else
         # @created = false
-        format.html { render :index, notice: 'Failed to create new post.' } #new
-        # format.html { render :new }
-        format.json { render json: @post.errors, status: :unprocessable_entity }
-        # format.js
+        format.json { render json: @post.errors.full_messages, status: :unprocessable_entity }
       end
     end
+  end
+
+  # GET /posts/1/edit
+  def edit
   end
 
   # PATCH/PUT /posts/1
@@ -50,24 +45,27 @@ class PostsController < ApplicationController
   def update
     respond_to do |format|
       if @post.update(post_params)
-        format.html { redirect_to @post, notice: 'Post was successfully updated.' }
-        format.json { render :show, status: :ok, location: @post }
-        # format.js
+        format.json { head :no_content }
+        format.js
+        # format.html { redirect_to @post, notice: 'Post was successfully updated.' }
       else
-        format.html { render :edit }
-        format.json { render json: @post.errors, status: :unprocessable_entity }
+        # format.html { render :edit }
+        format.json { render json: @post.errors.full_messages, status: :unprocessable_entity }
       end
+
     end
   end
+
 
   # DELETE /posts/1
   # DELETE /posts/1.json
   def destroy
     @post.destroy
+
     respond_to do |format|
-      format.html { redirect_to posts_url, notice: 'Post was successfully destroyed.' }
-      format.json { head :no_content }
       format.js
+      format.html { redirect_to posts_url }
+      format.json { head :no_content }
     end
   end
 
@@ -81,4 +79,5 @@ class PostsController < ApplicationController
     def post_params
       params.require(:post).permit(:title, :content)
     end
+
 end

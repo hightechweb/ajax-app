@@ -7,47 +7,19 @@
     </div>
 
     <div class="panel-body"><!-- Panel Body -->
-      <div style="color: #3BB2D6;"><%#= time_ago_in_words(post.created_at) %></div>
+      <div style="color: #3BB2D6;"><%= time_ago_in_words(post.created_at) %></div>
       <br>
 
-      <div class="btn-group" role="group" aria-label="...">
-          <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myupdatepost_<%= post.id %>">
-              Edit
-          </button>
-          <%= link_to 'Destroy', post, method: :delete, class: "btn btn-danger", remote: true %>
+      <div class="btn-group" role="group">
+        <%= link_to 'Show', post, remote: true, :class => 'btn btn-sm btn-primary' %>
+        <%= link_to 'Edit', edit_post_path(post), remote: true, :class => 'btn btn-sm btn-info' %>
+        <%= link_to 'Delete', post_path(id: post.id), remote: true, data: {confirm: 'You really want to delete? This cant be recovered',
+                                                          verify: 'delete', verify_text: 'Type "delete" to confirm'},
+                                                          method: :delete,
+                                                          :class => 'btn btn-sm btn-danger' %>
+
       </div>
     </div><!-- Panel Body -->
   </div><!-- Panel Info -->
-
-  <!-- Update Modal -->
-  <%= simple_form_for(post, :method => :put, remote: true) do |f| %>
-  <%= f.error_notification %>
-  <div class="modal fade" id="myupdatepost_<%= post.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title" id="myModalLabel">Update Post</h4>
-        </div>
-        <div class="modal-body">
-          <div class="field">
-              <%= f.label :title %><br>
-              <%= f.input :title, class: "form-control" %>
-          </div>
-          <div class="field">
-              <%= f.label :content %><br>
-              <%= f.input :content, class: "form-control" %>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" id="myupdatebutton_<%= post.id %>" class="btn btn-default" data-dismiss="modal">Close</button>
-          <%= submit_tag "Update", class: "btn btn-primary" %>
-        </div>
-      </div>
-    </div>
-  </div>
-  <% end %>
-  <!-- Modal End -->
-
 
 </div><!-- Panel container -->
