@@ -20,7 +20,6 @@ class PostsController < ApplicationController
   # POST /posts
   # POST /posts.json
   def create
-    # @posts = Post.all #fixed 'nil' is not an ActiveModel-compatible object. It must implement :to_partial_path ” error in posts#create # not here
     @post = Post.create(post_params)
 
     respond_to do |format|
@@ -61,7 +60,6 @@ class PostsController < ApplicationController
   # DELETE /posts/1.json
   def destroy
     @post.destroy
-
     respond_to do |format|
       format.js
       format.html { redirect_to posts_url }
