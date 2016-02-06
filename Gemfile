@@ -10,11 +10,11 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.1.0'
 gem 'bootstrap-sass', '~> 3.3.6'
 # DT twitter bootstrap rails
-gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
+gem 'twitter-bootstrap-rails'
 # DT simple_from for TWBS
 gem 'simple_form'
 # DT bootstrap data confirm modal to delete
-gem 'data-confirm-modal', github: 'ifad/data-confirm-modal'
+gem 'data-confirm-modal'
 # DT devise authentication | https://github.com/plataformatec/devise
 gem 'devise'
 gem 'devise-bootstrap-views'
