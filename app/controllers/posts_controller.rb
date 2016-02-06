@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+  before_action :authenticate_user! # devise, prevent users from accessing ALL post actions before login
   before_action :set_post, only: [:show, :edit, :update, :destroy]
 
   # GET /posts

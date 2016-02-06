@@ -15,6 +15,11 @@ gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootst
 gem 'simple_form'
 # DT bootstrap data confirm modal to delete
 gem 'data-confirm-modal', github: 'ifad/data-confirm-modal'
+# DT devise authentication | https://github.com/plataformatec/devise
+gem 'devise'
+gem 'devise-bootstrap-views'
+# DT rails admin panel gem
+gem 'rails_admin'
 
 
 # See https://github.com/rails/execjs#readme for more supported runtimes
@@ -46,6 +51,8 @@ group :development, :test do
   gem 'web-console', '~> 2.0'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+  # Environment variable keys using the dotenv gem.
+  gem 'dotenv-rails'
 end
 
 group :production do
