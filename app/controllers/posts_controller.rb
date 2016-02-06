@@ -24,13 +24,15 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       if @post.save
-        # @created = true
+        @created = true
         format.json { head :no_content }
         format.js
         # format.html { redirect_to @post, notice: 'Post was successfully created.' }
       else
-        # @created = false
-        format.json { render json: @post.errors.full_messages, status: :unprocessable_entity }
+        @created = false
+        # format.json { render json: @post.errors.full_messages, status: :unprocessable_entity }
+        format.html { render :new }
+        format.js
       end
     end
   end
@@ -46,9 +48,7 @@ class PostsController < ApplicationController
       if @post.update(post_params)
         format.json { head :no_content }
         format.js
-        # format.html { redirect_to @post, notice: 'Post was successfully updated.' }
       else
-        # format.html { render :edit }
         format.json { render json: @post.errors.full_messages, status: :unprocessable_entity }
       end
 

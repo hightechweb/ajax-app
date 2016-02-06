@@ -1,9 +1,9 @@
 <%= simple_form_for(@post, remote: true, :html => { :role => "form", :class => "form-horizontal" }) do |f| %>
   <%= f.error_notification %>
-<div id="error_display"></div>
+  <div id="error_display"></div>
 
-  <%= f.input :title  %>
-  <%= f.input :content %>
+  <%= f.input :title, :input_html => { class: 'form-control', id: 'title' } %>
+  <%= f.input :content, :input_html => { class: 'form-control', id: 'content' } %>
 
 <div class="modal-footer">
   <button type="button" class="btn btn-default" id="modal-close" data-dismiss="modal">Close</button>
