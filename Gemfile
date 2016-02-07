@@ -20,8 +20,7 @@ gem 'devise'
 gem 'devise-bootstrap-views'
 # DT rails admin panel gem
 gem 'rails_admin'
-# DT Environment variable keys using the dotenv gem.
-gem 'dotenv-rails'
+
 
 
 # See https://github.com/rails/execjs#readme for more supported runtimes
@@ -47,6 +46,9 @@ group :development, :test do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+
+  # DT Environment variable keys using the dotenv gem.
+  gem 'dotenv-rails'
 end
 
 group :production do

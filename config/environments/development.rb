@@ -1,6 +1,10 @@
 Rails.application.configure do
-  config.web_console.whitelisted_ips = '50.170.182.190'
   # Settings specified here will take precedence over those in config/application.rb.
+  # config.web_console.whitelisted_ips = '50.170.182.190'
+
+  # Sendgrid Heroku Mail Settings DT
+  ### config.action_mailer.delivery_method = :test
+  ### config.action_mailer.default_url_options = { :host => 'http://ruby-on-rails-148338.nitrousapp.com:3000'}
 
   # In the development environment your application's code is reloaded on
   # every request. This slows down response time but is perfect for development
@@ -39,4 +43,17 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
+
+  # Mandrill local SMTP mail settings
+  # Tell active mailer that we are going to use mandrill on the development environment
+  config.action_mailer.smtp_settings = {
+    address: ENV.fetch("SMTP_ADDRESS"),
+    authentication: :plain,
+    domain: ENV.fetch("SMTP_DOMAIN"),
+    enable_starttls_auto: true,
+    password: ENV.fetch("SMTP_PASSWORD"),
+    port: "587",
+    user_name: ENV.fetch("SMTP_USERNAME")
+  }
+  config.action_mailer.default_url_options = { host: ENV["SMTP_DOMAIN"] }
 end
