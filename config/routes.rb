@@ -1,13 +1,16 @@
 Rails.application.routes.draw do
   # rails_admin gem auto insert
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
-  
-  devise_for :users
+
+  devise_for :users, controllers: { registrations: 'registrations' }
   root 'home#index'
 
   resources :posts do
     get "delete"
   end
+
+  get 'dashboard', to: 'pages#dashboard'
+
   # root to: "posts#index"
 
   # The priority is based upon order of creation: first created -> highest priority.
