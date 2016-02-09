@@ -3,6 +3,13 @@ Rails.application.routes.draw do
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 
   devise_for :users, controllers: { registrations: 'registrations' }
+  devise_scope :user do
+   get 'users', to: 'registrations#show'
+   get "signup", to: "devise/registrations#new"
+   get "login", to: "devise/sessions#new"
+   get "logout", to: "devise/sessions#destroy"
+  end
+
   root 'home#index'
 
   resources :posts do

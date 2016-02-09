@@ -3,11 +3,14 @@
   <div class="panel panel-info"><!-- Panel Info -->
     <div class="panel-heading">
       <h3 class="panel-title"><%= post.title %></h3>
-      <p><%= post.content %></p>
+      <p><%= truncate(post.content, length: 50) %></p>
     </div>
 
     <div class="panel-body"><!-- Panel Body -->
-      <div style="color: #3BB2D6;"><%= time_ago_in_words(post.created_at) %></div>
+      <div style="color: #3BB2D6;">
+        <small>Created <%= time_ago_in_words(post.created_at) %> ago<br />
+                By <%= post.user.name if post.user %></small>
+      </div>
       <br>
 
       <div class="btn-group" role="group">
