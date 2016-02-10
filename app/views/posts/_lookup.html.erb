@@ -1,5 +1,5 @@
 <div id="post-lookup">
-  <h3>Search for Posts <%#= @user.id %></h3>
+  <h3>Search for Posts</h3>
   <%= form_tag search_posts_path, remote: true, method: :get, id: 'post-lookup-form' do %>
   <div class="form-group row no-padding text-center col-md-12">
     <div class="col-md-10">
@@ -9,18 +9,46 @@
     </div>
     <div class="col-md-2">
       <%= button_tag(type: :submit, class: "btn btn-lg btn-success") do %>
-        <i class="fa fa-search"></i> Look up a post
+        <i class="glyphicon glyphicon-search"></i> Look up a post
       <% end %>
     </div>
   </div>
-  <p><%= params.inspect %></p>
+  <p><%#= params.inspect %></p>
   <% end %>
-
+  <!-- AJAX Spinner -->
+  <%= render 'common/spinner' %>
   <!-- If lookup finds post -->
   <% if @post %>
   <div id="post-lookup-results" class="well results-block">
-    <strong>Post Title:</strong> <%= @post.title %>
+  <% @post.each do |post| %>
+  <div class="col-md-4 blog-main box text-center" id="post_<%= post.id %>"><!-- Panel container -->
+   <div class="panel panel-info"><!-- Panel Info -->
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= post.title %></h3>
+        <p><%= truncate(post.content, length: 50) %></p>
+      </div>
+
+      <div class="panel-body"><!-- Panel Body -->
+        <div style="color: #3BB2D6;">
+          <small>Created <%= time_ago_in_words(post.created_at) %> ago<br />
+                  By <%= post.user.name if post.user %></small>
+        </div>
+        <br>
+
+        <div class="btn-group" role="group">
+          <%= link_to 'Show', post, remote: true, :class => 'btn btn-sm btn-primary' %>
+          <%= link_to 'Edit', edit_post_path(post), remote: true, :class => 'btn btn-sm btn-info' %>
+          <%= link_to 'Delete', post_path(id: post.id), remote: true, data: {confirm: 'You really want to delete? This cant be recovered',
+                                                            verify: 'delete', verify_text: 'Type "delete" to confirm'},
+                                                            method: :delete,
+                                                            :class => 'btn btn-sm btn-danger' %>
+
+        </div>
+      </div><!-- Panel Body -->
+    </div><!-- Panel Info -->
+   </div>
+  <% end %>
   </div><!-- Panel container -->
   <% end %>
-
+  <div id="post-lookup-errors"></div>
 </div>

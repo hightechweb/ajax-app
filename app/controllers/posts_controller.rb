@@ -75,14 +75,13 @@ class PostsController < ApplicationController
 
   def search
     if params[:post]
-      params[:user_id] = current_user.id #get current user id and assign to search var
-      # @post = Post.find_by_title(params[:post]) #SEE post.rb file
+      params[:user_id] = current_user.id
       @post = Post.find_user_posts_by_title(params[:post], params[:user_id])
+      # @post = Post.find_by_title(params[:post]) #SEE post.rb file
     end
 
     if @post
-      # render json: @poste
-      render partial: 'lookup'
+      render partial: 'lookup' # render json: @post
     else
       render status: :not_found, nothing: true
     end

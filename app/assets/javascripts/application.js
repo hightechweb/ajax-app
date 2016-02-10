@@ -20,7 +20,6 @@
 // Custom error validation function for AJAX CRUD modals
 // The validation errors will be shown on the #error_display div in _form.html.erb
 $(document).ajaxError(function(event,xhr,options,exc) {
-
     var errors = JSON.parse(xhr.responseText);
     var er ='<div class="alert alert-danger alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
     for(var i = 0; i < errors.length; i++){
@@ -29,5 +28,13 @@ $(document).ajaxError(function(event,xhr,options,exc) {
     }
     er+='</div>';
     $("#error_display").html(er);
-
 });
+
+// AJAX spinner for _lookup.html.erb partial
+var hide_spinner = function(){
+  $('#spinner').hide();
+}
+
+var show_spinner = function(){
+  $('#spinner').show();
+}

@@ -5,8 +5,7 @@ class Post < ActiveRecord::Base
   validates :title, presence: true, length: { minimum: 2, maximum: 30 }
   validates :content, length: { minimum: 10, maximum: 150 }, allow_blank: false
 
-  # Search method
-  # Post with userassociation3
+  # Search methods
   def self.find_by_title(title)
     # Adding .first (or .take in Rails 4) will ensure only one object is returned.
     # where(title: title).take
@@ -15,9 +14,9 @@ class Post < ActiveRecord::Base
 
   def self.find_user_posts_by_title(title, user_id)
     if title.present?
-      where("title LIKE (?) AND user_id = (?)", "%#{title}%", "#{user_id}").take
+      where("title LIKE (?) AND user_id = (?)", "%#{title}%", "#{user_id}")
     else
-      where("title = (?) AND user_id = (?)", "#{title}", "#{user_id}").take
+      where(title: title, user_id: user_id).take
     end
   end
 
