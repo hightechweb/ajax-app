@@ -1,0 +1,26 @@
+<div id="post-lookup">
+  <h3>Search for Posts <%#= @user.id %></h3>
+  <%= form_tag search_posts_path, remote: true, method: :get, id: 'post-lookup-form' do %>
+  <div class="form-group row no-padding text-center col-md-12">
+    <div class="col-md-10">
+      <%= text_field_tag :post, params[:post], placeholder: "Post search", autofocus: true,
+                                                        class: 'form-control search-box input-lg' %>
+
+      <%= text_field_tag :user_id, params[:user_id], value: current_user.id, hidden: true %>
+    </div>
+    <div class="col-md-2">
+      <%= button_tag(type: :submit, class: "btn btn-lg btn-success") do %>
+        <i class="fa fa-search"></i> Look up a post
+      <% end %>
+    </div>
+  </div>
+  <% end %>
+
+  <!-- If lookup finds post -->
+  <% if @post %>
+  <div id="post-lookup-results" class="well results-block">
+    <strong>Post Title:</strong> <%= @post.title %>
+  </div><!-- Panel container -->
+  <% end %>
+
+</div>

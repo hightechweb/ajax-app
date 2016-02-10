@@ -4,10 +4,10 @@ Rails.application.routes.draw do
 
   devise_for :users, controllers: { registrations: 'registrations' }
   devise_scope :user do
-   get 'users', to: 'registrations#show'
-   get "signup", to: "devise/registrations#new"
-   get "login", to: "devise/sessions#new"
-   get "logout", to: "devise/sessions#destroy"
+    get 'users/posts', to: 'registrations#show'
+   # get "signup", to: "devise/registrations#new"
+   # get "login", to: "devise/sessions#new"
+   # get "logout", to: "devise/sessions#destroy"
   end
 
   root 'home#index'
@@ -17,6 +17,8 @@ Rails.application.routes.draw do
   end
 
   get 'dashboard', to: 'pages#dashboard'
+  get 'my_posts', to: 'users#my_posts' #DEVISE Override
+  get 'search_posts', to: 'posts#search'
 
   # root to: "posts#index"
 

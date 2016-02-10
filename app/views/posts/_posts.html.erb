@@ -1,0 +1,30 @@
+<% obj.each do |post| %>
+<div class="col-md-4 blog-main box text-center" id="post_<%= post.id %>"><!-- Panel container -->
+
+  <div class="panel panel-info"><!-- Panel Info -->
+    <div class="panel-heading">
+      <h3 class="panel-title"><%= post.title %></h3>
+      <p><%= truncate(post.content, length: 50) %></p>
+    </div>
+
+    <div class="panel-body"><!-- Panel Body -->
+      <div style="color: #3BB2D6;">
+        <small>Created <%= time_ago_in_words(post.created_at) %> ago<br />
+                By <%= post.user.name if post.user %></small>
+      </div>
+      <br>
+
+      <div class="btn-group" role="group">
+        <%= link_to 'Show', post, remote: true, :class => 'btn btn-sm btn-primary' %>
+        <%= link_to 'Edit', edit_post_path(post), remote: true, :class => 'btn btn-sm btn-info' %>
+        <%= link_to 'Delete', post_path(id: post.id), remote: true, data: {confirm: 'You really want to delete? This cant be recovered',
+                                                          verify: 'delete', verify_text: 'Type "delete" to confirm'},
+                                                          method: :delete,
+                                                          :class => 'btn btn-sm btn-danger' %>
+
+      </div>
+    </div><!-- Panel Body -->
+  </div><!-- Panel Info -->
+
+</div><!-- Panel container -->
+<% end %>

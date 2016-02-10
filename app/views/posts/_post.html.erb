@@ -9,17 +9,23 @@
     <div class="panel-body"><!-- Panel Body -->
       <div style="color: #3BB2D6;">
         <small>Created <%= time_ago_in_words(post.created_at) %> ago<br />
-                By <%= post.user.name if post.user %></small>
+                By <%= post.user.name if post.user %>
+          <%= link_to post.user.name, users_posts_path(id: post.user) if post.user %><br />
+          <%= link_to post.user.name, my_posts_path(id: post.user) if post.user %>
+        </small>
       </div>
       <br>
 
       <div class="btn-group" role="group">
         <%= link_to 'Show', post, remote: true, :class => 'btn btn-sm btn-primary' %>
-        <%= link_to 'Edit', edit_post_path(post), remote: true, :class => 'btn btn-sm btn-info' %>
-        <%= link_to 'Delete', post_path(id: post.id), remote: true, data: {confirm: 'You really want to delete? This cant be recovered',
-                                                          verify: 'delete', verify_text: 'Type "delete" to confirm'},
-                                                          method: :delete,
-                                                          :class => 'btn btn-sm btn-danger' %>
+
+        <% if post.user == current_user  %>
+          <%= link_to 'Edit', edit_post_path(post), remote: true, :class => 'btn btn-sm btn-info' %>
+          <%= link_to 'Delete', post_path(id: post.id), remote: true, data: {confirm: 'You really want to delete? This cant be recovered',
+                                                            verify: 'delete', verify_text: 'Type "delete" to confirm'},
+                                                            method: :delete,
+                                                            :class => 'btn btn-sm btn-danger' %>
+        <% end %>
 
       </div>
     </div><!-- Panel Body -->

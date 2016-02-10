@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
-  before_action :authenticate_user! # devise, prevent users from accessing ALL post actions before login
+  # devise, prevent users from accessing ALL post actions before login
+  before_action :authenticate_user!, except: [:index, :show]
   before_action :set_post, only: [:show, :edit, :update, :destroy]
 
   # GET /posts
@@ -15,14 +16,16 @@ class PostsController < ApplicationController
 
   # GET /posts/new
   def new
-    @post = Post.new
+    # @post = Post.new DEVISE BELOW
+    @post = current_user.posts.build
   end
 
   # POST /posts
   # POST /posts.json
   def create
-    @post = Post.create(post_params)
-    @post.user = User.first
+    # @post = Post.create(post_params) DEVISE BELOW
+    @post = current_user.posts.build(post_params)
+    # @post.user = User.first DEVISE ABOVE
 
     respond_to do |format|
       if @post.save
@@ -69,15 +72,31 @@ class PostsController < ApplicationController
     end
   end
 
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_post
-      @post = Post.find(params[:id])
+
+  def search
+    if params[:post]
+      # @post = Post.find_by_title(params[:post]) #SEE post.rb file
+      @post = Post.find_user_posts_by_title(params[:post], params[:user_id])
+      # @post ||= Post.new_from_lookup(params[:post])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def post_params
-      params.require(:post).permit(:title, :content, :user_id)
+    if @post
+      # render json: @poste
+      render partial: 'lookup'
+    else
+      render status: :not_found, nothing: true
     end
+  end
+
+  private
+  # Use callbacks to share common setup or constraints between actions.
+  def set_post
+    @post = Post.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def post_params
+    params.require(:post).permit(:title, :content, :user_id)
+  end
 
 end
