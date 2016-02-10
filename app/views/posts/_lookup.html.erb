@@ -6,7 +6,6 @@
       <%= text_field_tag :post, params[:post], placeholder: "Post search", autofocus: true,
                                                         class: 'form-control search-box input-lg' %>
 
-      <%= text_field_tag :user_id, params[:user_id], value: current_user.id, hidden: true %>
     </div>
     <div class="col-md-2">
       <%= button_tag(type: :submit, class: "btn btn-lg btn-success") do %>
@@ -14,6 +13,7 @@
       <% end %>
     </div>
   </div>
+  <p><%= params.inspect %></p>
   <% end %>
 
   <!-- If lookup finds post -->

@@ -75,9 +75,9 @@ class PostsController < ApplicationController
 
   def search
     if params[:post]
+      params[:user_id] = current_user.id #get current user id and assign to search var
       # @post = Post.find_by_title(params[:post]) #SEE post.rb file
       @post = Post.find_user_posts_by_title(params[:post], params[:user_id])
-      # @post ||= Post.new_from_lookup(params[:post])
     end
 
     if @post
