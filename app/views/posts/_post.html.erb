@@ -9,9 +9,7 @@
     <div class="panel-body"><!-- Panel Body -->
       <div style="color: #3BB2D6;">
         <small>Created <%= time_ago_in_words(post.created_at) %> ago<br />
-                By <%= post.user.name if post.user %>
-          <%= link_to post.user.name, users_posts_path(id: post.user) if post.user %><br />
-          <%= link_to post.user.name, my_posts_path(id: post.user) if post.user %>
+                By <%= link_to post.user.name, users_posts_path(id: post.user) if post.user %>
         </small>
       </div>
       <br>

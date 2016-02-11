@@ -1,6 +1,6 @@
 <div id="post-lookup">
-  <h3>Search My Posts</h3>
-  <%= form_tag search_posts_path, remote: true, method: :get, id: 'post-lookup-form' do %>
+  <h3>Search All Posts</h3>
+  <%= form_tag search_all_posts_path, remote: true, method: :get, id: 'post-lookup-form' do %>
   <div class="form-group row no-padding text-center col-md-12">
     <div class="col-md-10" style="padding-bottom: 10px;">
       <%= text_field_tag :post, params[:post], placeholder: "Post search", autofocus: true,
@@ -37,12 +37,16 @@
         <br>
 
         <div class="btn-group" role="group">
+
+
           <%= link_to 'Show', post, remote: true, :class => 'btn btn-sm btn-primary' %>
+          <% if post.user == current_user  %>
           <%= link_to 'Edit', edit_post_path(post), remote: true, :class => 'btn btn-sm btn-info' %>
           <%= link_to 'Delete', post_path(id: post.id), remote: true, data: {confirm: 'You really want to delete? This cant be recovered',
                                                             verify: 'delete', verify_text: 'Type "delete" to confirm'},
                                                             method: :delete,
                                                             :class => 'btn btn-sm btn-danger' %>
+          <% end %>
 
         </div>
       </div><!-- Panel Body -->

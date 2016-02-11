@@ -10,7 +10,7 @@ Rails.application.routes.draw do
    # get "logout", to: "devise/sessions#destroy"
   end
 
-  root 'home#index'
+  root 'posts#index'
 
   resources :posts do
     get "delete"
@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   get 'all_posts', to: 'posts#all_posts' #DEVISE Override
 
   get 'search_posts', to: 'posts#search'
+  get 'search_all_posts', to: 'posts#search_all'
 
   # root to: "posts#index"
 

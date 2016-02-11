@@ -17,7 +17,11 @@ class PostsController < ApplicationController
   # GET /posts/new
   def new
     # @post = Post.new DEVISE BELOW
-    @post = current_user.posts.build
+    if current_user
+      @post = current_user.posts.build
+    else
+      redirect_to new_user_registration_path, notice: 'Post was successfully created.'
+    end
   end
 
   # POST /posts
@@ -74,15 +78,25 @@ class PostsController < ApplicationController
 
 
   def search
-    if (params[:post].blank? && params[:user_id].blank)
+    if params[:post]
       params[:user_id] = current_user.id
       @post = Post.find_user_posts_by_title(params[:post], params[:user_id])
-    else
-      @post = Post.find_by_title(params[:post])
     end
 
     if @post
       render partial: 'lookup' # render json: @post
+    else
+      render status: :not_found, nothing: true
+    end
+  end
+
+  def search_all
+    if params[:post]
+      @post = Post.find_by_title(params[:post])
+    end
+
+    if @post
+      render partial: 'lookupall' # render json: @post
     else
       render status: :not_found, nothing: true
     end

@@ -12,6 +12,6 @@
 
 
 <div class="modal-footer">
-  <%= link_to 'Edit Post', edit_post_path(@post) , remote: true, :class => "btn btn-default" %>
+  <%= link_to 'Edit Post', edit_post_path(@post), remote: true, :class => "btn btn-default" if @post.user == current_user  %>
   <button type="button" class="btn btn-primary" id="modal-close" data-dismiss="modal">Close</button>
 </div>

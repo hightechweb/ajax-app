@@ -16,11 +16,13 @@
 
       <div class="btn-group" role="group">
         <%= link_to 'Show', post, remote: true, :class => 'btn btn-sm btn-primary' %>
+        <% if post.user == current_user  %>
         <%= link_to 'Edit', edit_post_path(post), remote: true, :class => 'btn btn-sm btn-info' %>
         <%= link_to 'Delete', post_path(id: post.id), remote: true, data: {confirm: 'You really want to delete? This cant be recovered',
                                                           verify: 'delete', verify_text: 'Type "delete" to confirm'},
                                                           method: :delete,
                                                           :class => 'btn btn-sm btn-danger' %>
+        <% end %>
 
       </div>
     </div><!-- Panel Body -->
