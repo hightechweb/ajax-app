@@ -74,10 +74,11 @@ class PostsController < ApplicationController
 
 
   def search
-    if params[:post]
+    if (params[:post].blank? && params[:user_id].blank)
       params[:user_id] = current_user.id
       @post = Post.find_user_posts_by_title(params[:post], params[:user_id])
-      # @post = Post.find_by_title(params[:post]) #SEE post.rb file
+    else
+      @post = Post.find_by_title(params[:post])
     end
 
     if @post

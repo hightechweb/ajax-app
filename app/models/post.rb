@@ -9,7 +9,7 @@ class Post < ActiveRecord::Base
   def self.find_by_title(title)
     # Adding .first (or .take in Rails 4) will ensure only one object is returned.
     # where(title: title).take
-    where("title LIKE (?)", "%#{title}%").take
+    where("title LIKE (?)", "%#{title}%")
   end
 
   def self.find_user_posts_by_title(title, user_id)

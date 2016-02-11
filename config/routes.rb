@@ -18,6 +18,8 @@ Rails.application.routes.draw do
 
   get 'dashboard', to: 'pages#dashboard'
   get 'my_posts', to: 'users#my_posts' #DEVISE Override
+  get 'all_posts', to: 'posts#all_posts' #DEVISE Override
+
   get 'search_posts', to: 'posts#search'
 
   # root to: "posts#index"

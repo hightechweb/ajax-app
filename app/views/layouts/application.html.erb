@@ -39,18 +39,11 @@
   <!-- Flash Message end -->
 
 
-<!-- If user logged in, show logout links. Else, show log in links -->
-<% if current_user %>
-  <%= link_to "Logout", destroy_user_session_path, method: :delete %>
-<% else %>
-  <%= link_to "Login", new_user_session_path %>
-<% end %>
-
-
   <%= yield %>
+
 </div><!-- Container -->
 
 <%= debug(params) if Rails.env.development? %>
-  
+
 </body>
 </html>

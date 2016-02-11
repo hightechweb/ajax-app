@@ -1,19 +1,20 @@
 <div id="post-lookup">
-  <h3>Search for Posts</h3>
+  <h3>Search Posts</h3>
   <%= form_tag search_posts_path, remote: true, method: :get, id: 'post-lookup-form' do %>
   <div class="form-group row no-padding text-center col-md-12">
-    <div class="col-md-10">
+    <div class="col-md-10" style="padding-bottom: 10px;">
       <%= text_field_tag :post, params[:post], placeholder: "Post search", autofocus: true,
                                                         class: 'form-control search-box input-lg' %>
+      <%#= text_field_tag :user_id, params[:user_id], value: current_user.id, hidden: true %>
 
     </div>
     <div class="col-md-2">
-      <%= button_tag(type: :submit, class: "btn btn-lg btn-success") do %>
+      <%= button_tag(type: :submit, name: nil, class: "btn btn-lg btn-success") do %>
         <i class="glyphicon glyphicon-search"></i> Look up a post
       <% end %>
     </div>
   </div>
-  <p><%#= params.inspect %></p>
+  <p><%= params.inspect %></p>
   <% end %>
   <!-- AJAX Spinner -->
   <%= render 'common/spinner' %>

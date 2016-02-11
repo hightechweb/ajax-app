@@ -1,0 +1,19 @@
+<%= render 'posts/lookup' %>
+
+<h1 align="center">Welcome to <%= @user.name %>'s page</h1>
+
+    <div class="row">
+      <div class="text-center">
+          <!-- Button trigger modal -->
+          <%= link_to "New Post", new_post_path, remote: true, class: "btn btn-primary btn-lg" %>
+      </div>
+    </div>
+    <br>
+    <hr>
+
+    <div class="row" id="container_posts">
+        <%= render 'posts/posts', obj: @user.posts %>
+    </div>
+
+  <!-- Modal dynamics dialog -->
+  <%= render 'posts/dialog' %>
